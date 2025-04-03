@@ -1,7 +1,11 @@
-import Header from '@/components/Header';
+"use client" 
+
+import { SessionProvider } from 'next-auth/react';
+import Header from '../components/Header.js';
 import './globals.css';
 import { Gabarito } from 'next/font/google';
-import Footer from '@/components/Footer';
+import Footer from '../components/Footer.js';
+
 
 const gabarito = Gabarito({
   subsets: ['latin'],
@@ -9,22 +13,20 @@ const gabarito = Gabarito({
   variable: '--font-gabarito'
 });
 
-export const metadata = {
-  title: 'Next Daisy Starter',
-  description: 'Quick Frontend Setup for Your Next Project'
-};
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang='en'
-      className={gabarito.variable}
-    >
-      <body>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <SessionProvider>
+      <html
+        lang='en'
+        className={gabarito.variable}
+      >
+        <body>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </SessionProvider>
   );
 }
